@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap-5.3.8-dist\bootstrap-5.3.8-dist\css\bootstrap.min.css">
+    <script type="module" src="bootstrap-5.3.8-dist\bootstrap-5.3.8-dist\js\bootstrap.min.js"></script>
+    <title>Document</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; scroll-behavior: smooth; color: #333;}
+        .hero-section { min-height: 80vh; display: flex; align-items: center; }
+        .project-card { border: none; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        section { padding: 80px 0; }
+        .skill-badge { padding: 10px 20px; border-radius: 50px; background: #ece5e5; margin: 5px; display: inline-block; }
+       
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Rupa Shree</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section text-center text-white bg-dark">
+        <div class="container">
+            <h1 class="display-4 fw-bold text-white">Hi, I'm Rupa Shree</h1>
+            <p class="lead text-white">A Computer Science Student & Aspiring ML Engineer</p>
+            <a href="#projects" class="btn btn-primary btn-lg mt-3">View My Work</a>
+        </div>
+    </header>
+
+    <section id="about" class="container bg-light">
+                <h2 class="fw-bold">About Me</h2>
+                <p>Aspiring Machine Learning Engineer with foundational skills in HTML, CSS, and JavaScript, along with
+programming knowledge in Java and Python. Experienced as a Class Representative, contributing to
+effective student–faculty coordination, teamwork, and academic communication, with a strong interest
+in machine learning and data-driven problem solving.</p>
+    </section>
+    <section id="about" class="bg-dark text-center py-5">
+        <div class="container">
+        <center><h5 class="fw-bold text-white">Education</h5></center>
+        <div class="row g-4">
+            <div class="col-md-4 text-center">
+                <div class="p-4 bg-light rounded">
+                    <p class="mb-1 text-primary"> Secondary  School Education</p>
+                    <p class="mb-1 text-primary">S.H.N.Girls Higher Secondary School</p>
+                    <p class="small text-muted">2020-2021</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="p-4 bg-light rounded">
+                    <p class="mb-1 text-primary">Higher Secondary Education</p>
+                    <p class="mb-1 text-primary">S.H.N.Girls Higher Secondary School</p>
+                    <p class="small text-muted">2022-2023</p>
+                </div>
+            </div>
+        <div class="col-md-4 text-center">
+                <div class="p-4 bg-light rounded">
+                    <p class="mb-1 text-primary">BE.CSE</p>
+                    <p class="mb-1 text-primary">Kamaraj College of Engineering and Technology</p>
+                    <p class="small text-muted">2023-2027</p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section id="projects" class="bg-white">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">Featured Projects</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 project-card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Weather website</h5>
+                            <p class="card-text text-muted">A real-time weather tracking app using OpenWeather API.</p>
+                            <span class="badge bg-secondary">JavaScript</span>
+                            <span class="badge bg-secondary">API</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 project-card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Hire 3X</h5>
+                            <p class="card-text text-muted">A real-time website used for recuiters to rank candidates using their Resume</p>
+                            <span class="badge bg-secondary">Python</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100 project-card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Career bot</h5>
+                            <p class="card-text text-muted">A  real-time website used to suggest job based on user interest.</p>
+                            <span class="badge bg-secondary">ML</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="bg-dark">
+        <div class="container">
+        <h2 class="text-center fw-bold mb-5 text-white">Skills</h2>
+        <div class="row justify-content-center text-center text-white">
+            <div class="col-6 col-md-2 mb-3">
+                <div class="p-3 border rounded shadow-sm">HTML5</div>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+                <div class="p-3 border rounded shadow-sm">CSS3</div>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+                <div class="p-3 border rounded shadow-sm">JavaScript</div>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+                <div class="p-3 border rounded shadow-sm">Python</div>
+            </div>
+            <div class="col-6 col-md-2 mb-3">
+                <div class="p-3 border rounded shadow-sm">JAVA</div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-white text-dark text-center py-5">
+        <div class="container">
+            <h2 class="fw-bold mb-4">Get In Touch</h2>
+            <p>Ready to start a project or just want to say hi?</p>
+            <a href="mailto:rupashree717@gmail.com" class="btn btn-outline-dark px-4 mt-2">Email Me</a>
+            <div class="mt-4">
+                <a href="#" class="text-dark me-3 text-decoration-none">LinkedIn</a>
+                <a href="#" class="text-dark text-decoration-none">GitHub</a>
+            </div>
+            <hr class="mt-5 opacity-25">
+            <p class="small text-muted">&copy; 2026 Rupa Shree. All Rights Reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

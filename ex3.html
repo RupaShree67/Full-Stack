@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>KCET Learning Quiz</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+body{
+font-family: Arial, sans-serif;
+background:#f4f6f8;
+}
+.quiz-container{
+width:550px;
+margin:40px auto;
+background:#fff;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 10px #ccc;
+}
+h2{text-align:center}
+.timer{
+text-align:right;
+color:red;
+font-weight:bold;
+display:none;
+}
+.question{
+font-size:18px;
+margin-bottom:15px;
+}
+.options label{
+display:block;
+background:#ecf0f1;
+padding:8px;
+margin:6px 0;
+border-radius:5px;
+cursor:pointer;
+}
+button{
+padding:8px 15px;
+background:#3498db;
+color:white;
+border:none;
+border-radius:5px;
+margin:5px;
+cursor:pointer;
+}
+button:hover{background:#2980b9}
+.result,.review,#quiz-box{display:none}
+.correct{color:green;font-weight:bold}
+.wrong{color:red;font-weight:bold}
+.start-box{text-align:center}
+</style>
+</head>
+
+<body>
+<div class="quiz-container">
+
+<h2>KCET Learning Quiz</h2>
+
+<!-- START QUIZ -->
+<div class="start-box">
+<p>Total Questions: 10<br>Time: 2 Minutes<br>Each Question: 2 Marks</p>
+<button id="startQuiz">Start Quiz</button>
+</div>
+
+<!-- TIMER -->
+<div class="timer">
+Time Left: <span id="time">120</span> sec
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-box">
+<div class="question"></div>
+<div class="options"></div>
+<button id="prev">Previous</button>
+<button id="next">Next</button>
+</div>
+
+<!-- RESULT -->
+<div class="result">
+<h2>Quiz Completed</h2>
+<p id="score"></p>
+<button id="reviewBtn">Review Answers</button>
+<button id="restart">Restart Quiz</button>
+</div>
+
+<!-- REVIEW -->
+<div class="review">
+<h2>Answer Review</h2>
+<div id="reviewContent"></div>
+</div>
+
+</div>
+
+<script>
+$(document).ready(function(){
+
+let questions = [
+{q:"HTML stands for?",options:["Hyper Text Markup Language","High Text Machine Language","Hyper Tool"],answer:0},
+{q:"CSS used for?",options:["Styling","Programming","Database"],answer:0},
+{q:"JavaScript is a?",options:["Markup","Scripting","Design"],answer:1},
+{q:"jQuery is a?",options:["PHP","JS Library","Python"],answer:1},
+{q:"ID selector symbol?",options:["#",".","*"],answer:0},
+{q:"Which tag for link?",options:["a tag","p tag","div tag"],answer:0},
+{q:"Bootstrap is used for?",options:["Design","Server","DB"],answer:0},
+{q:"Which is not a language?",options:["HTML","Java","Python"],answer:0},
+{q:"Button click event?",options:["load","click","hover"],answer:1},
+{q:"jQuery developed by?",options:["Google","Microsoft","JS Foundation"],answer:2}
+];
+
+let current = 0;
+let answers = [];
+let time = 120;
+let timer;
+
+function loadQuestion(){
+$(".question").html((current+1)+". "+questions[current].q);
+let html="";
+$.each(questions[current].options,function(i,opt){
+let checked = answers[current]==i ? "checked" : "";
+html += `<label>
+<input type="radio" name="opt" value="${i}" ${checked}>
+${opt}
+</label>`;
+});
+$(".options").html(html);
+}
+
+function startTimer(){
+timer = setInterval(function(){
+time--;
+$("#time").text(time);
+if(time<=0){
+clearInterval(timer);
+showResult();
+}
+},1000);
+}
+
+function showResult(){
+clearInterval(timer);
+$("#quiz-box,.timer").hide();
+let score=0;
+$.each(answers,function(i,val){
+if(val==questions[i].answer){score+=2;}
+});
+$("#score").html(`Correct Answers: ${score/2}<br>Total Marks: ${score} / 20`);
+$(".result").show();
+}
+
+$("#startQuiz").click(function(){
+$(".start-box").hide();
+$("#quiz-box,.timer").show();
+loadQuestion();
+startTimer();
+});
+
+$("#next").click(function(){
+let selected = $("input[name='opt']:checked").val();
+if(selected===undefined){alert("Please select an answer!");return;}
+answers[current]=parseInt(selected);
+if(current<questions.length-1){
+current++; loadQuestion();
+}else{
+showResult();
+}
+});
+
+$("#prev").click(function(){
+if(current>0){current--; loadQuestion();}
+});
+
+$("#reviewBtn").click(function(){
+$(".result").hide();
+$(".review").show();
+let html="";
+$.each(questions,function(i,q){
+let ua=answers[i], ca=q.answer;
+html+=`
+<p><b>${i+1}. ${q.q}</b><br>
+Your Answer: <span class="${ua==ca?'correct':'wrong'}">${q.options[ua]}</span><br>
+Correct Answer: <span class="correct">${q.options[ca]}</span>
+</p><hr>`;
+});
+$("#reviewContent").html(html);
+});
+
+$("#restart").click(function(){
+location.reload();
+});
+
+});
+</script>
+</body>
+</html>

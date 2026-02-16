@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+<meta charset="UTF-8">
+<title>AngularJS Advanced To-Do App</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+<style>
+
+
+body{
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg,#74c1eb,#9face6);
+    padding:40px;
+    min-height:100vh;
+}
+
+/* MAIN CARD */
+.container{
+    width:450px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+/* INPUT AREA */
+input[type=text]{
+    width:70%;
+    padding:12px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    outline:none;
+    transition:0.3s;
+}
+
+input[type=text]:focus{
+    border-color:#6c63ff;
+    box-shadow:0 0 5px rgba(108,99,255,0.4);
+}
+
+/* BUTTONS */
+button{
+    padding:10px 14px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    color:white;
+    font-weight:600;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/* BUTTON COLORS */
+button:not(.delete):not(.edit):not(.filter){
+    background:#6c63ff;
+}
+
+button.delete{
+    background:#ff4d4d;
+}
+
+button.edit{
+    background:#ffa500;
+    color:black;
+}
+
+button.filter{
+    background:#444;
+}
+
+/* TASK LIST */
+ul{
+    list-style:none;
+    padding:0;
+    margin-top:20px;
+}
+
+li{
+    padding:12px;
+    border-radius:10px;
+    background:#f8f9fc;
+    margin-bottom:10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition:0.3s;
+}
+
+li:hover{
+    background:#eef0ff;
+    transform:translateY(-2px);
+}
+
+/* TASK TEXT */
+.task-text{
+    flex:1;
+    margin-left:10px;
+    font-size:16px;
+}
+
+/* COMPLETED TASK */
+.done{
+    text-decoration: line-through;
+    color:#888;
+}
+
+/* FILTER BUTTON SPACE */
+.filter-area{
+    margin-top:15px;
+    text-align:center;
+}
+
+/* ANIMATION */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(10px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width:500px){
+    .container{
+        width:95%;
+        padding:15px;
+    }
+
+    input[type=text]{
+        width:100%;
+        margin-bottom:10px;
+    }
+}
+
+</style>
+
+</style>
+</head>
+
+<body ng-controller="todoController">
+
+<div class="container">
+
+<h2>My To-Do List</h2>
+
+<!-- ADD TASK -->
+<input type="text" ng-model="newTask" placeholder="Enter task">
+<button ng-click="addTask()">Add</button>
+
+<!-- FILTER BUTTONS -->
+<div style="margin-top:15px;">
+    <button class="filter" ng-click="setFilter('all')">All</button>
+    <button class="filter" ng-click="setFilter('active')">Active</button>
+    <button class="filter" ng-click="setFilter('completed')">Completed</button>
+</div>
+
+<!-- TASK LIST -->
+<ul>
+<li ng-repeat="task in tasks | filter:taskFilter">
+
+    <input type="checkbox" ng-model="task.completed">
+
+    <!-- VIEW MODE -->
+    <span class="task-text"
+          ng-class="{'done':task.completed}"
+          ng-hide="task.editing">
+        {{task.name}}
+    </span>
+
+    <!-- EDIT MODE -->
+    <input type="text"
+           ng-model="task.name"
+           ng-show="task.editing"
+           style="flex:1; margin-left:10px;">
+
+    <!-- BUTTONS -->
+    <div>
+        <button class="edit" ng-click="editTask(task)" ng-hide="task.editing">Edit</button>
+        <button class="edit" ng-click="saveTask(task)" ng-show="task.editing">Save</button>
+        <button class="delete" ng-click="deleteTask($index)">Delete</button>
+    </div>
+
+</li>
+</ul>
+
+</div>
+
+<script>
+var app = angular.module("todoApp", []);
+
+app.controller("todoController", function($scope){
+
+    $scope.tasks = [];
+
+    // ADD TASK
+    $scope.addTask = function(){
+        if($scope.newTask){
+            $scope.tasks.push({
+                name:$scope.newTask,
+                completed:false,
+                editing:false
+            });
+            $scope.newTask="";
+        }
+    };
+
+    // DELETE
+    $scope.deleteTask = function(index){
+        $scope.tasks.splice(index,1);
+    };
+
+    // EDIT
+    $scope.editTask = function(task){
+        task.editing = true;
+    };
+
+    // SAVE
+    $scope.saveTask = function(task){
+        task.editing = false;
+    };
+
+    // FILTER LOGIC
+    $scope.filterType = "all";
+
+    $scope.setFilter = function(type){
+        $scope.filterType = type;
+    };
+
+    $scope.taskFilter = function(task){
+        if($scope.filterType === "active"){
+            return !task.completed;
+        }
+        if($scope.filterType === "completed"){
+            return task.completed;
+        }
+        return true;
+    };
+
+});
+</script>
+
+</body>
+</html>
